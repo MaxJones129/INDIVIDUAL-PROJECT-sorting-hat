@@ -8,28 +8,43 @@
   <link rel="stylesheet" href="main.css">
 </head>
 <body>
-  <form>
-    <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="name" placeholder="Name" required>
-      <label for="floatingInput">Wizard Name</label>
+  <button type="button" class="addWizard">+</button>
+  
+  <section class="modal hidden">
+    <div class="flex">
+      <button class="closeBtn">&#x2715;</button>
     </div>
 
-    <div class="form-floating mb-3">
-      <input type="url" class="form-control" id="image" placeholder="image" required>
-      <label for="floatingInput">Wizard Image</label>
+    <div>
+      <h3 class="mt-2">Add a Wizard</h3>
+      <p>Please enter the wizard's information to add it to the page.</p>
     </div>
 
-    <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="specialSkill" placeholder="Skill" required>
-      <label for="floatingInput">Special Skill</label>
-    </div>
+    <form>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="name" placeholder="Name" required>
+        <label for="floatingInput">Wizard Name</label>
+      </div>
 
-    <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="house" placeholder="House" required>
-      <label for="floatingInput">House</label>
-    </div>
-    <button type="submit" class="btn btn-success" id="form-submit">Add Wizard</button>
-  </form>
+      <div class="form-floating mb-3">
+        <input type="url" class="form-control" id="image" placeholder="image" required>
+        <label for="floatingInput">Wizard Image</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="specialSkill" placeholder="Skill" required>
+        <label for="floatingInput">Special Skill</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="house" placeholder="House" required>
+        <label for="floatingInput">House</label>
+      </div>
+      <button type="submit" class="btn btn-success" id="form-submit">Add Wizard</button>
+    </form>
+  </section>
+  <div class="overlay hidden"></div>
+  <div id="render-modal-here"></div>
   <div class="buttons">
     <button class="btn btn-primary" id="hufflepuff">Hufflepuff</button>
     <button class="btn btn-primary" id="slytherin">Slytherin</button>

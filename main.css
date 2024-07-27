@@ -1,4 +1,45 @@
 #app {
   display: flex;
   flex-wrap: wrap;
+  gap: 2%;
+  padding-left: 17%;
+  padding-right: 17%;
+  row-gap: 50px;
+}
+
+.img-thumbnail {
+  width: 276px;
+  height: 400px;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center; 
+}
+
+.form-floating {
+  width: 600px;
+}
+
+.hufflepuffFooter {
+  background-color: yellow;
+}
+
+.slytherinFooter {
+  background-color: green;
+}
+
+.gryffindorFooter {
+  background-color: red;
+}
+
+.ravenclawFooter {
+  background-color: purple;
+}
+
+.card-body1 {
+  display: flex;
+  justify-content: center;
 }

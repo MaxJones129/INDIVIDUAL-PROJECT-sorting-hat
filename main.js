@@ -43,6 +43,8 @@ const wizards = [
   }
 ];
 
+const banished = [];
+
 // Sets renderToDom, which is needed to render the array in the first place.
 const renderToDom = (divId, htmlToRender) => {
   const selectedDiv = document.querySelector(divId);
@@ -71,7 +73,7 @@ const cardsOnDom = (array) => {
         <img src="${wizard.imageUrl}" class="img-thumbnail" id = "imgMain" alt="...">
         <h6 class="card-body1">${wizard.specialSkill}</h6>
         <div class="card-footer ${wizardFooter}" id="footer" dataType="${wizard.house}">${wizard.house}</div>
-      <button class="btn btn-danger" id="delete--${wizard.id}">Delete</button>
+      <button class="btn btn-danger" id="delete--${wizard.id}">Expel</button>
       </div>`;
   }
   renderToDom("#app", domString);
@@ -121,6 +123,7 @@ const cardsOnDom = (array) => {
 
     // Pushes "new" array to DOM.
     cardsOnDom(wizards);
+    closeModal();
 
     // Must have when changing form on-site.
     form.reset();
@@ -136,17 +139,21 @@ const cardsOnDom = (array) => {
   app.addEventListener('click', (e) => {
     // Tests for if targeted delete button has delete in the domString, (all cards should).
     if (e.target.id.includes('delete')) {
-      const banishedWizards = [];
+      
       // , is needed to be the starting position, id is your end poistion.
       // split("--") = calls on your -- in the domString to target where the event occurs.
       const [, id] = e.target.id.split('--');
-      // Assigning clicked button index. || Taking string and converting to number.
+      
+      // Finding clicked button's index. || Taking string and converting to number.
       const index = wizards.findIndex((e) => e.id === Number(id));
       
+      // const cardex = wizards.findIndex((e));
+
       // Deletes index of card selected. || , 1 = how many items in array you want to splice.
-      // wizards.splice(index, 1);
-      banishedWizards.push(index)
+      // banished.push((e));
       wizards.splice(index, 1);
+      // banished.push(e);
+      banished.push(cardex);
 
       // Reapplys cards with "new" array to DOM. 
       cardsOnDom(wizards);  
@@ -194,7 +201,24 @@ const cardsOnDom = (array) => {
   });
   
   showBanishedButton.addEventListener("click", () => {
-    cardsOnDom(banishedWizards);
+    cardsOnDom(banished);
   });
   
-   
+const targetModal = document.querySelector(".modal");
+const overlay = document.querySelector(".overlay");
+const openModalBtn = document.querySelector(".addWizard");
+const closeModalBtn = document.querySelector(".closeBtn");
+  
+// Creates variable for opening modal.
+const openModal = () => {
+  targetModal.classList.remove("hidden");
+  overlay.classList.remove("hidden");
+};
+
+openModalBtn.addEventListener("click", openModal);
+
+// Creates variable for closing modal.
+const closeModal = () => {
+  targetModal.classList.add("hidden");
+  overlay.classList.add("hidden");
+};
