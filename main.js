@@ -8,7 +8,7 @@ const wizards = [
   },
   {
     id: 2,
-    name: "Achenlogia",
+    name: "Achnelogia",
     house: "Slytherin",
     specialSkill: "Has a large dark, dragon like aura exuding at all times.",
     imageUrl: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/eeba25a9-9ec6-40ad-8de3-cd92204aaa20/d5d1i0h-709bc847-e586-4fd7-a8af-8a6671e92dd6.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2VlYmEyNWE5LTllYzYtNDBhZC04ZGUzLWNkOTIyMDRhYWEyMFwvZDVkMWkwaC03MDliYzg0Ny1lNTg2LTRmZDctYThhZi04YTY2NzFlOTJkZDYuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.pPxSo4GM2Pomb__381X4FLPFiun2XtS77FJK8XmDfZw",
@@ -43,6 +43,8 @@ const wizards = [
   }
 ];
 
+const banished = [];
+
 // Sets renderToDom, which is needed to render the array in the first place.
 const renderToDom = (divId, htmlToRender) => {
   const selectedDiv = document.querySelector(divId);
@@ -70,8 +72,8 @@ const cardsOnDom = (array) => {
         <h5 class="card-title">${wizard.name}</h5>
         <img src="${wizard.imageUrl}" class="img-thumbnail" id = "imgMain" alt="...">
         <h6 class="card-body1">${wizard.specialSkill}</h6>
-        <div class="card-footer ${wizardFooter}" id="footer" dataType="${wizard.house}">${wizard.house}</div>
-      <button class="btn btn-danger" id="delete--${wizard.id}">Delete</button>
+        <div class="card-footer ${wizardFooter}" id="footer">${wizard.house}</div>
+      <button class="btn btn-danger" id="delete--${wizard.id}">Expel</button>
       </div>`;
   }
   renderToDom("#app", domString);
@@ -104,6 +106,10 @@ const cardsOnDom = (array) => {
   // Creates new pet varialbe and creates an event inside.
   const createWizard = (e) => {
 
+    const drop = document.querySelector("#selectHouse").value;
+    // const dropValue = drop.value;
+    // document.querySelector('.dropdownOutput').textContent = dropValue;
+
     // Needed for every form.
     e.preventDefault();
 
@@ -112,7 +118,7 @@ const cardsOnDom = (array) => {
       id: wizards.length + 1,
       name: document.querySelector("#name").value,
       imageUrl: document.querySelector("#image").value,
-      type: document.querySelector("#house").value,
+      house: drop,
       specialSkill: document.querySelector("#specialSkill").value
     }
 
@@ -136,17 +142,19 @@ const cardsOnDom = (array) => {
   app.addEventListener('click', (e) => {
     // Tests for if targeted delete button has delete in the domString, (all cards should).
     if (e.target.id.includes('delete')) {
-      const banishedWizards = [];
+      
       // , is needed to be the starting position, id is your end poistion.
       // split("--") = calls on your -- in the domString to target where the event occurs.
       const [, id] = e.target.id.split('--');
-      // Assigning clicked button index. || Taking string and converting to number.
+      
+      // Finding clicked button's index. || Taking string and converting to number.
       const index = wizards.findIndex((e) => e.id === Number(id));
       
+      // const cardex = wizards.findIndex(e);
+
       // Deletes index of card selected. || , 1 = how many items in array you want to splice.
       // wizards.splice(index, 1);
-      banishedWizards.push(index)
-      wizards.splice(index, 1);
+      
 
       // Reapplys cards with "new" array to DOM. 
       cardsOnDom(wizards);  
@@ -161,6 +169,7 @@ const cardsOnDom = (array) => {
    const showRavenclawButton = document.querySelector("#ravenclaw"); 
    const showBanishedButton = document.querySelector("#banished");
    const showAllButton = document.querySelector("#resetbtn");
+  //  const showFormButton = document.querySelector("#formMain");
    
    // Adds all pets button to show all "pets" in the array.
    showAllButton.addEventListener("click", () => {
@@ -194,7 +203,98 @@ const cardsOnDom = (array) => {
   });
   
   showBanishedButton.addEventListener("click", () => {
-    cardsOnDom(banishedWizards);
+    cardsOnDom(banished);
   });
   
-   
+
+
+  // showFormButton.addEventListener("click", () => {
+  //   cardsOnDom(formMain);
+  // });
+
+
+  
+// const targetModal = document.querySelector(".modal");
+// const overlay = document.querySelector(".overlay");
+// const openModalBtn = document.querySelector(".addWizard");
+// const closeModalBtn = document.querySelector(".closeBtn");
+  
+// // Creates variable for opening modal.
+// const openModal = () => {
+//   targetModal.classList.remove("hidden");
+//   overlay.classList.remove("hidden");
+//   console.log("working");
+// };
+
+// openModalBtn.addEventListener("click", openModal);
+
+// // Creates variable for closing modal.
+// const closeModal = () => {
+//   targetModal.classList.add("hidden");
+//   overlay.classList.add("hidden");
+// };
+
+// const search = (event) => {
+//   const eventLC = event.target.value.toLowerCase();
+//   const searchResult = referenceList.filter(wiz =>
+//     wiz.name.toLowerCase().includes(eventLC) ||
+//     wiz.specialSkill.toLowerCase().includes(eventLC) ||
+//     wiz.house.toLowerCase().includes(eventLC)
+//   );
+//   renderCards(searchResult);
+// }
+
+// const cardsOnDom2 = (event) => {
+//   let domString2 = "";
+//   for (const wizard of event) {
+
+    
+//     // Adds to domString varible.
+//     domString2 += 
+//       `<div class = "formMain">
+//         <form>
+//           <div class="form-floating mb-3">
+//             <label for="floatingInput">Wizard Name</label>
+//             <input type="text" class="form-control" id="name" placeholder="Name" required>
+//           </div>
+
+//           <div class="form-floating mb-3">
+//             <label for="floatingInput">Wizard Image</label>
+//             <input type="url" class="form-control" id="image" placeholder="image" required>
+//           </div>
+
+//           <div class="form-floating mb-3">
+//             <label for="floatingInput">Special Skill</label>
+//             <input type="text" class="form-control" id="specialSkill" placeholder="Skill" required>
+//           </div>
+
+//           <div class="form-floating mb-3">
+//             <label for="floatingInput">House</label>
+//             <input type="text" class="form-control" id="house" placeholder="House" required>
+//           </div>
+//           <button type="submit" class="btn btn-success" id="form-submit">Add Wizard</button>
+//         </form>
+//       </div>`;
+//   }
+//   renderToDom("#formBtn", domString2);
+// };
+
+// showFormButton.addEventListener("click", () => {
+//   cardsOnDom(form);
+// });
+
+// const createStudent = (e) => { e.preventDefault(); // Prevents page from reloading prior to changes being made const 
+//   selectedRadioButton = document.querySelector('input[name="flexRadioDefault"]:checked'); const newPreferToDo = document.querySelector(label[for="${selectedRadioButton.id}"]).innerText; const newStudentObj = {  
+//     // Creating variable to use to create new pet card object
+//       id: students.length +1,
+//         firstName: document.querySelector("#exampleFirstName").value,
+//         lastName: document.querySelector("#exampleLastName").value,
+//         const newPreferToDo = document.querySelector(label[for="${selectedRadioButton.id}"]).innerText;
+//         students.push(newStudentObj);   
+//         // Pushes new student card object to end of existing petCards array 
+//         cardsOnDom(students);  
+//         // Repaints DOM with new array 
+//         form.reset();  // Resets form 
+//         } 
+        
+//         form.addEventListener("submit", createStudent);
