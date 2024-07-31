@@ -42,6 +42,11 @@ form {
   background-color: purple;
 }
 
+.banishedFooter {
+  background-color: black;
+  color: white;
+}
+
 .card-body1 {
   display: flex;
   justify-content: center;
@@ -105,4 +110,58 @@ form {
   align-items: center;
   width: 160px; 
   margin-top: 50px;
+}
+
+#hufflepuff {
+  background-color: yellow;
+  color: black;
+  font-weight: 1000;
+}
+
+#slytherin {
+  background-color: green;
+  color: black;
+  font-weight: 1000;
+}
+
+#gryffindor {
+  background-color: red;
+  color: black;
+  font-weight: 1000;
+}
+
+#ravenclaw {
+  background-color: purple;
+  color: black;
+  font-weight: 1000;
+}
+
+#banished {
+  background-color: black;
+  color: white;
+  font-weight: 1000;
+}
+
+#resetBtn {
+  font-weight: 1000;
+}
+
+.card {
+  height: 561px;
+  width: 268px;
+}
+
+.card-body1 {
+  display: flex;
+  justify-content: center;
+}
+
+.card-title {
+  display: flex;
+  justify-content: center;
+}
+
+#footer {
+  display: flex;
+  justify-content: center;
 }
