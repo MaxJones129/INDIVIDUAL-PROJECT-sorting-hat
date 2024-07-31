@@ -48,7 +48,7 @@ const banished = [
   id: 1,
     name: "Gorgle",
     house: "Banished",
-    specialSkill: "This guy sucks. Like no one likes him.",
+    specialSkill: "This guy sucks. Like no one likes him. Seriously no one.",
     imageUrl: "https://static.wikia.nocookie.net/p__/images/a/ad/AAA767AC-9A40-42B9-8AB2-93A59843A18D.png/revision/latest/scale-to-width/360?cb=20191115025221&path-prefix=protagonist",
   }
 ];
@@ -72,7 +72,7 @@ const cardsOnDom = (array, divId) => {
     wizard.house === "Slytherin" ? "slytherinFooter" :
     wizard.house === "Gryffindor" ? "gryffindorFooter" :
     wizard.house === "Ravenclaw" ? "ravenclawFooter" :
-    // wizard.house === "Banished" ? "banishedFooter" :
+    wizard.house === "Banished" ? "banishedFooter" :
     "";
 
     // Adds to domString varible.
@@ -98,6 +98,9 @@ document.querySelector("#app").addEventListener("click", (e) => {
 
     if (index !== -1) {
       const banishedWizard = wizards.splice(index, 1)[0];
+    
+      banishedWizard.house = "Banished";
+      
       banished.push(banishedWizard);
 
       cardsOnDom(wizards, "#app");
@@ -213,7 +216,7 @@ document.querySelector("#app").addEventListener("click", (e) => {
    const showGryffindorButton = document.querySelector("#gryffindor");
    const showRavenclawButton = document.querySelector("#ravenclaw"); 
    const showBanishedButton = document.querySelector("#banished");
-   const showAllButton = document.querySelector("#resetbtn");
+   const showAllButton = document.querySelector("#resetBtn");
   //  const showFormButton = document.querySelector("#formMain");
    
    // Adds all pets button to show all "pets" in the array.
@@ -250,6 +253,7 @@ document.querySelector("#app").addEventListener("click", (e) => {
   showBanishedButton.addEventListener("click", () => {
     cardsOnDom(banished, "#app");
   });
+  
   
 
 
