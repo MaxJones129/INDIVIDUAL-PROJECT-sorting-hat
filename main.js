@@ -43,7 +43,17 @@ const wizards = [
   }
 ];
 
-const banished = [];
+const banished = [
+  {
+  id: 1,
+    name: "Gorgle",
+    house: "Banished",
+    specialSkill: "This guy sucks. Like no one likes him.",
+    imageUrl: "https://static.wikia.nocookie.net/p__/images/a/ad/AAA767AC-9A40-42B9-8AB2-93A59843A18D.png/revision/latest/scale-to-width/360?cb=20191115025221&path-prefix=protagonist",
+  }
+];
+
+const houses = ["Hufflepuff", "Slytherin", "Gryffindor", "Ravenclaw"];
 
 // Sets renderToDom, which is needed to render the array in the first place.
 const renderToDom = (divId, htmlToRender) => {
@@ -52,9 +62,8 @@ const renderToDom = (divId, htmlToRender) => {
 };
 
 // Gets the cards on the DOM and sets cardOnDom for many future uses.
-const cardsOnDom = (array) => {
-  let domString = "";
-  for (const wizard of array) {
+const cardsOnDom = (array, divId) => {
+  let domString = array.map(wizard => {
 
     // Changes footer class of card depending on pet.type string.
     const wizardFooter =
@@ -63,21 +72,39 @@ const cardsOnDom = (array) => {
     wizard.house === "Slytherin" ? "slytherinFooter" :
     wizard.house === "Gryffindor" ? "gryffindorFooter" :
     wizard.house === "Ravenclaw" ? "ravenclawFooter" :
-    wizard.house === "Banished" ? "banishedFooter" :
+    // wizard.house === "Banished" ? "banishedFooter" :
     "";
 
     // Adds to domString varible.
-    domString += 
-      `<div class="card" style="width: 18rem;">
+    return `
+      <div class="card" style="width: 18rem;">
         <h5 class="card-title">${wizard.name}</h5>
         <img src="${wizard.imageUrl}" class="img-thumbnail" id = "imgMain" alt="...">
         <h6 class="card-body1">${wizard.specialSkill}</h6>
         <div class="card-footer ${wizardFooter}" id="footer">${wizard.house}</div>
-      <button class="btn btn-danger" id="delete--${wizard.id}">Expel</button>
+        <button class="btn btn-danger" id="delete--${wizard.id}">Expel</button>
       </div>`;
-  }
-  renderToDom("#app", domString);
+  }).join("");
+  renderToDom(divId, domString);
 };
+
+cardsOnDom(wizards,"#app");
+// cardsOnDom(banished,"#app2nd");
+
+document.querySelector("#app").addEventListener("click", (e) => {
+  if (e.target.id.includes("delete")) {
+    const [, id] = e.target.id.split("--");
+    const index = wizards.findIndex(wizard => wizard.id === Number(id));
+
+    if (index !== -1) {
+      const banishedWizard = wizards.splice(index, 1)[0];
+      banished.push(banishedWizard);
+
+      cardsOnDom(wizards, "#app");
+      // cardsOnDom(banished, "app2nd");
+    }
+  }
+});
   
   // Sets filter for filter pet buttons at bottom of page.
   const filter = (array, typeString) => {
@@ -98,15 +125,33 @@ const cardsOnDom = (array) => {
     return wizardArray;
   };
 
-  // Get all the cards to render on the DOM.
-  cardsOnDom(wizards);
-
   const form = document.querySelector("form");
+
+  // const renderCards = (array) => {
+  //   let refStuff = "";
+  
+  //   array.forEach((wizard) => {
+  //     refStuff += domString(wizard);
+  //   });
+    
+  //   renderToDom("#app", refStuff);
+  // }
+
+  // const search = (event) => {
+  //   const eventLC = event.target.value.toLowerCase();
+  //   const searchResult = wizards.filter(wizard =>
+  //     wizard.name.toLowerCase().includes(eventLC) ||
+  //     wizard.specialSkill.toLowerCase().includes(eventLC) ||
+  //     wizard.house.toLowerCase().includes(eventLC)
+  //   );
+  //   renderCards(searchResult);
+  // }
 
   // Creates new pet varialbe and creates an event inside.
   const createWizard = (e) => {
 
-    const drop = document.querySelector("#selectHouse").value;
+    const randomNumber = Math.floor(Math.random() * houses.length);
+    const randomHouse = houses[randomNumber];
     // const dropValue = drop.value;
     // document.querySelector('.dropdownOutput').textContent = dropValue;
 
@@ -118,7 +163,7 @@ const cardsOnDom = (array) => {
       id: wizards.length + 1,
       name: document.querySelector("#name").value,
       imageUrl: document.querySelector("#image").value,
-      house: drop,
+      house: randomHouse,
       specialSkill: document.querySelector("#specialSkill").value
     }
 
@@ -126,7 +171,7 @@ const cardsOnDom = (array) => {
     wizards.push(newWizardObj);
 
     // Pushes "new" array to DOM.
-    cardsOnDom(wizards);
+    cardsOnDom(wizards, "#app");
 
     // Must have when changing form on-site.
     form.reset();
@@ -138,28 +183,28 @@ const cardsOnDom = (array) => {
   // Creates app variable and assigns it to #app div. ??
   const app = document.querySelector('#app');
 
-  // When delete button is clicked, and (e), the event, occurs, this code runs.
-  app.addEventListener('click', (e) => {
-    // Tests for if targeted delete button has delete in the domString, (all cards should).
-    if (e.target.id.includes('delete')) {
+  // // When delete button is clicked, and (e), the event, occurs, this code runs.
+  // app.addEventListener('click', (e) => {
+  //   // Tests for if targeted delete button has delete in the domString, (all cards should).
+  //   if (e.target.id.includes('delete')) {
       
-      // , is needed to be the starting position, id is your end poistion.
-      // split("--") = calls on your -- in the domString to target where the event occurs.
-      const [, id] = e.target.id.split('--');
+  //     // , is needed to be the starting position, id is your end poistion.
+  //     // split("--") = calls on your -- in the domString to target where the event occurs.
+  //     const [, id] = e.target.id.split('--');
       
-      // Finding clicked button's index. || Taking string and converting to number.
-      const index = wizards.findIndex((e) => e.id === Number(id));
+  //     // Finding clicked button's index. || Taking string and converting to number.
+  //     const index = wizards.findIndex((e) => e.id === Number(id));
       
-      // const cardex = wizards.findIndex(e);
+  //     // const cardex = wizards.findIndex(e);
 
-      // Deletes index of card selected. || , 1 = how many items in array you want to splice.
-      // wizards.splice(index, 1);
+  //     // Deletes index of card selected. || , 1 = how many items in array you want to splice.
+  //     // wizards.splice(index, 1);
       
 
-      // Reapplys cards with "new" array to DOM. 
-      cardsOnDom(wizards);  
-    }
-  });
+  //     // Reapplys cards with "new" array to DOM. 
+  //     cardsOnDom(wizards);  
+  //   }
+  // });
   
 
    // Creates variable that targets the filter pet buttons on the DOM.
@@ -173,7 +218,7 @@ const cardsOnDom = (array) => {
    
    // Adds all pets button to show all "pets" in the array.
    showAllButton.addEventListener("click", () => {
-     cardsOnDom(wizards);
+     cardsOnDom(wizards, "#app");
    });
 
   // Adds funtion to "hufflepuff" button to filter only hufflepuff on the array.
@@ -181,29 +226,29 @@ const cardsOnDom = (array) => {
     // Creates array that contains filtered wizards with typeString === to "Hufflepuff".
     const hufflepuff = filter(wizards, "Hufflepuff");
     // Displays new filtered array on the DOM.
-    cardsOnDom(hufflepuff);
+    cardsOnDom(hufflepuff, "#app");
   });
   
   // Adds funtion to "Slytherin" button to filter only slytherin on the array.
   showSlytherinButton.addEventListener("click", () => {
     const slytherin = filter(wizards, "Slytherin");
-    cardsOnDom(slytherin);
+    cardsOnDom(slytherin, "#app");
   });
 
   // Adds funtion to "Gryffindor" button to filter only gryffindors on the array.
   showGryffindorButton.addEventListener("click", () => {
     const gryffindor = filter(wizards, "Gryffindor");
-    cardsOnDom(gryffindor);
+    cardsOnDom(gryffindor, "#app");
   });
 
   // Adds funtion to "Ravenclaw" button to filter only ravenclaws on the array.
   showRavenclawButton.addEventListener("click", () => {
     const ravenclaw = filter(wizards, "Ravenclaw");
-    cardsOnDom(ravenclaw);
+    cardsOnDom(ravenclaw, "#app");
   });
   
   showBanishedButton.addEventListener("click", () => {
-    cardsOnDom(banished);
+    cardsOnDom(banished, "#app");
   });
   
 
@@ -234,15 +279,7 @@ const cardsOnDom = (array) => {
 //   overlay.classList.add("hidden");
 // };
 
-// const search = (event) => {
-//   const eventLC = event.target.value.toLowerCase();
-//   const searchResult = referenceList.filter(wiz =>
-//     wiz.name.toLowerCase().includes(eventLC) ||
-//     wiz.specialSkill.toLowerCase().includes(eventLC) ||
-//     wiz.house.toLowerCase().includes(eventLC)
-//   );
-//   renderCards(searchResult);
-// }
+
 
 // const cardsOnDom2 = (event) => {
 //   let domString2 = "";
