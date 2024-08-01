@@ -8,76 +8,34 @@
   <link rel="stylesheet" href="main.css">
 </head>
 <body>
-  <div class= "modal" id= "overlayModal" tabindex= "-1">
+  
+  <!-- Sets bootstrap modal up and gives it text and a close button. data-bs-backdrop='static' changes it so that the background does not close the modal and you have to use the close-btn.-->
+  <div class= "modal" id= "overlayModal" tabindex= "-1" data-bs-backdrop='static'>
     <div class= "modal-dialog modal-fullscreen-lg-down">
       <div class= "modal-content">
         <div class= "modal-header">
+          <!-- Text content of modal. -->
           <h5 class= "modal=title">Welcome To WartHogs</h5>
+          <!-- Close button for modal. -->
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
       </div>
     </div>
-  </div>
+  </div>>
 
+  <!-- Sets a js script that will run on page load and causes modal to pop up. -->
   <script>
+    // Bootstrap script to cause pop up on start.
     window.onload = function() {
-      var myModal = new bootstrap.Modal(document.getElementById("overlayModal"));
+      const myModal = new bootstrap.Modal(document.getElementById("overlayModal"));
       myModal.show();
     };
   </script>
-  <!-- <nav class="navbar navbar-light bg-light">
-    <form class="form-inline">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </nav> -->
-  <!-- <div class="form-floating mb-3">
-    <input type="text" class="form-control" id="searchInput" placeholder="SEARCH">
-    <label for="searchInput">Search</label>
-  </div> -->
-  <!-- <div class="mainBody"> -->
-    <!-- <button type="button" id="addWizard">+</button> -->
-    
-    <!-- <section class="hidden modal">
-      <div class="flex">
-        <button class="closeBtn">&#x2715;</button>
-      </div>
-      
-      <div>
-        <h3 class="mt-2">Add a Wizard</h3>
-        <p>Please enter the wizard's information to add it to the page.</p>
-      </div> -->
-      <!-- <div class = "form1"  id = "formMain">
-        <form>
-          <div class="form-floating mb-3">
-            <label for="floatingInput">Wizard Name</label>
-            <input type="text" class="form-control" id="name" placeholder="Name" required>
-          </div>
 
-          <div class="form-floating mb-3">
-            <label for="floatingInput">Wizard Image</label>
-            <input type="url" class="form-control" id="image" placeholder="image" required>
-          </div>
-
-          <div class="form-floating mb-3">
-            <label for="floatingInput">Special Skill</label>
-            <input type="text" class="form-control" id="specialSkill" placeholder="Skill" required>
-          </div>
-
-          <div class="form-floating mb-3">
-            <label for="floatingInput">House</label>
-            <input type="text" class="form-control" id="house" placeholder="House" required>
-          </div>
-
-          <button type="submit" class="btn btn-success" id="form-submit">Add Wizard</button>
-        </form>
-      </div> -->
-    
-    <!-- <div class="overlay hidden"></div>
-    <div id="render-modal-here"></div> -->
 
     <div class= "mainDiv">
       <div class="buttons">
+        <!-- Buttons for filtering students by house or banishment. -->
         <button class="btn btn-primary" id="hufflepuff">Hufflepuff</button>
         <button class="btn btn-primary" id="slytherin">Slytherin</button>
         <button class="btn btn-primary" id="gryffindor">Gryffindor</button>
@@ -85,11 +43,15 @@
         <button class="btn btn-primary" id="banished">Banished</button>
         <button class="btn btn-primary" id="resetBtn">Wizards In School</button>
       </div>
+      <!-- The div where the domString gets posted under array conditions. -->
       <div id="app"></div>
       <div class = "form1"  id = "formMain">
         <div class="dropdown">
+          <!-- Sets button for a dropdown menu that will contain whatever you want. -->
           <button class="btn btn-secondary dropdown-toggle" id="dropdownBtn" type="button" data-bs-toggle="dropdown" aria-expanded="false">Add Wizard</button>
+          <!-- Bootstrap dropdown button uses an unordered list to gather components. In this case the form for createWizard is inside. -->
           <ul class="dropdown-menu">
+            <!-- Form for creating new wizard. Links with js to gather values inputed into form and then use them elsewhere. -->
             <form>
               <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="name" placeholder="Name" required>
@@ -103,43 +65,11 @@
                 <input type="text" class="form-control" id="specialSkill" placeholder="Skill" required>
                 <label for="floatingInput">Special Skill</label>
               </div>
+              <!-- Button for finalizing form. -->
               <button type="submit" class="btn btn-success" id="form-submit">Add Wizard</button>
             <form>
           </ul>
-        </div>
-          <!-- <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="name" placeholder="Name" required>
-            <label for="floatingInput">Wizard Name</label>
-          </div> -->
-
-          <!-- <div class="form-floating mb-3">
-            <input type="url" class="form-control" id="image" placeholder="image" required>
-            <label for="floatingInput">Wizard Image</label>
-          </div> -->
-
-          <!-- <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="specialSkill" placeholder="Skill" required>
-            <label for="floatingInput">Special Skill</label>
-          </div> -->
-
-          <!-- <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="house" placeholder="House" required>
-            <label for="floatingInput">House</label>
-          </div> -->
-          
-          <!-- <div id = "dropdownBox">
-            <select id = "selectHouse" name = "dropdown">
-              <option id = "huffleP" value = "Hufflepuff" selected>Hufflepuff</option>
-              <option id = "slytherN" value = "Slytherin">Slytherin</option>
-              <option id = "gryfndor" value = "Gryffindor">Gryffindor</option>
-              <option id = "ravenclw" value = "Ravenclaw">Ravenclaw</option>
-            </select>
-            <span class="dropdownOutput"></span>
-          </div> -->
-
-          <!-- <button type="submit" class="btn btn-success" id="form-submit">Add Wizard</button> -->
-        <!-- </form> -->
-        <!-- <div id="app2nd"></div> -->
+        </div>         
       </div>
     </div>
   </div>

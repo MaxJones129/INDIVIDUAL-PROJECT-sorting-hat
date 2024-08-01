@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 2%;
-  padding-left: 10%;
+  margin-left: 10%;
   row-gap: 50px;
   width: 80%;
   margin-top: 50px;
@@ -53,21 +53,15 @@ form {
 }
 
 .buttons {
+  z-index: 2;
   display: flex;
   flex-direction: column;
+  align-content: center;
   row-gap: 50px;
   width: 8%;
-  margin-top: 50px;
+  margin-top: 9%;
+  position:fixed;
 }
-
-/* body {
-  background-image: "https://images.ctfassets.net/usf1vwtuqyxm/71J6YPxNauhFABbjHpGluJ/631bd6980b0a430d5b476ef331abb2b5/release_1_hogwarts.png" !important;
-} */
-
-/* .mainBody {
-  display: flex;
-  flex-wrap: wrap;
-} */
 
 .mainDiv {
   display: flex;
@@ -75,33 +69,14 @@ form {
   background-image: url("https://images.ctfassets.net/usf1vwtuqyxm/71J6YPxNauhFABbjHpGluJ/631bd6980b0a430d5b476ef331abb2b5/release_1_hogwarts.png");
   width: auto;
   height: auto;
+  /* Extremely useful when needing to fit background to entire div instead of looping it. */
   background-size: cover;
 }
-
-
-/* #formMain {
-  opacity: 0;
-  visibility: hidden;
-  transition: 0.2s;
-  transform: translateX(20px);
-  &[data-open] {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(0);
-  }
-} */
 
 #selectHouse {
   width: 160px;
   margin-bottom: 25px;
 }
-
-/* body {
-  width: 100%;
-  height: 100%;
-  background-image: url("https://images.ctfassets.net/usf1vwtuqyxm/71J6YPxNauhFABbjHpGluJ/631bd6980b0a430d5b476ef331abb2b5/release_1_hogwarts.png");
-  object-fit: cover;
-} */
 
 #dropdownBtn {
   display: flex;
@@ -109,7 +84,8 @@ form {
   flex-direction: column;
   align-items: center;
   width: 160px; 
-  margin-top: 50px;
+  margin-top: 9%;
+  position:fixed;
 }
 
 #hufflepuff {
@@ -147,13 +123,15 @@ form {
 }
 
 .card {
-  height: 561px;
+  height: 578px;
   width: 268px;
 }
 
 .card-body1 {
   display: flex;
   justify-content: center;
+  height: 60px;
+  padding-left: 3px;
 }
 
 .card-title {
