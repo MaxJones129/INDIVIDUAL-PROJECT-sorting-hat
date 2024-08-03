@@ -61,6 +61,7 @@ form {
   width: 8%;
   margin-top: 9%;
   position:fixed;
+  margin-left: 5px;
 }
 
 .mainDiv {
@@ -85,7 +86,7 @@ form {
   align-items: center;
   width: 160px; 
   margin-top: 9%;
-  position:fixed;
+  position: fixed;
 }
 
 #hufflepuff {
