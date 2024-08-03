@@ -261,6 +261,7 @@ const startDOM = document.querySelector(".btn-close");
 startDOM.addEventListener("click", () => {
   // Renders domString into #app and displays wizard array.  
   cardsOnDom(wizards,"#app");
+
 });
 
 // Adds event to expel button when clicked.
@@ -397,4 +398,4 @@ document.querySelector("#app").addEventListener("click", (e) => {
   
 
 
-  
+  // NEED TO COMPLETE README, LOOM, AND IF HAVE TIME IMPLEMENT SEARCH BAR AND ALPHABETICAL SORTING
